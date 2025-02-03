@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCHA Humanitarian Icons Gallery</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #009edb;
+            /* UN Blue */
+        }
+
+        .search-box {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .search-box input {
+            padding: 12px 20px;
+            width: 320px;
+            font-size: 16px;
+            border: 2px solid #009edb;
+            border-radius: 25px;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            border-color: #007bb5;
+            box-shadow: 0 0 8px rgba(0, 158, 219, 0.6);
+        }
+
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .icon-item {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .icon-item img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+        }
+
+        .icon-name {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #333;
+            word-break: break-word;
+        }
+
+    </style>
+</head>
+
+<body>
+    <h1>OCHA Humanitarian Icons Gallery</h1>
+
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search icons..." onkeyup="filterIcons()">
+    </div>
+
+    <div class="icon-grid" id="iconGrid">
+        <!-- Icons will be inserted here -->
+    </div>
+
+    <script>
+        const icons = [
+            "Abduction-kidnapping.svg", "About.svg", "Add-document.svg", "Add.svg", "Advocacy.svg",
+            "Affected-population.svg", "Agile.svg", "Agriculture.svg", "AI-chat.svg", "Airport-affected.svg",
+            "Airport-closed.svg", "Airport-destroyed.svg", "Airport-military.svg", "Airport-not-affected.svg",
+            "Airport.svg", "Alert.svg", "Analysis.svg", "Anticipatory-action.svg", "API.svg", "Apps.svg",
+            "Arrest-detention.svg", "Assault.svg", "Assembly-point.svg", "Assessment.svg", "Attack.svg",
+            "Bacteria.svg", "Blanket.svg", "Blog.svg", "Boat.svg", "Bookmark.svg", "Border-closed.svg",
+            "Border-crossing.svg", "Borehole.svg", "Bottled-water.svg", "Bridge-affected.svg",
+            "Bridge-closed.svg", "Bridge-destroyed.svg", "Bridge-not-affected.svg", "Bridge.svg",
+            "Bucket.svg", "Buddhist-temple.svg", "Building-closed.svg", "Building-facility-affected.svg",
+            "Building-facility-destroyed.svg", "Building-facility-not-affected.svg", "Building.svg",
+            "Bus.svg", "Calendar.svg", "Camp-Coordination-and-Camp-Management.svg", "Car.svg",
+            "Carjacking.svg", "Case-management.svg", "Cash-transfer.svg", "Cell-tower.svg", "Chart.svg",
+            "Chat.svg", "Checked-mail.svg", "Checkpoint.svg", "Child-care-child-friendly.svg",
+            "Child-combatant.svg", "Child-protection.svg", "Children.svg", "Church.svg",
+            "Civil-military-coordination.svg", "Clinic.svg", "Clothing.svg", "Cold-wave.svg",
+            "Communal-latrine.svg", "Community-building.svg", "Community-engagement.svg", "Computer.svg",
+            "Confined.svg", "Conflict.svg", "Coordinated-assessement.svg", "Coordination.svg",
+            "Copy.svg", "Country.svg", "COVID-19.svg", "CSV-file.svg", "Cyclone.svg",
+            "Damaged-Affected.svg", "Dangerous-area.svg", "Data.svg", "Dead.svg", "Debris-management.svg",
+            "Delete-account.svg", "Deployment.svg", "Destroyed.svg", "Detergent.svg",
+            "Diplomatic-mission.svg", "Distribution-site.svg", "Doctor.svg", "Document.svg",
+            "DOCX-file.svg", "Down.svg", "Download.svg", "Drought.svg", "Drowned.svg",
+            "E-mail.svg", "Early-Recovery.svg", "Earthmound.svg", "Earthquake.svg", "Edit.svg",
+            "Education.svg", "Elderly.svg", "Emergency-Telecommunications.svg", "Environment.svg",
+            "Epidemic.svg", "Exit-Cancel.svg", "Expand-down.svg", "Expand-left.svg", "Expand-right.svg",
+            "Expand-up.svg", "Famine.svg", "Favourite.svg", "Fax.svg", "Ferry.svg",
+            "Film.svg", "Filter.svg", "Financing.svg", "Fire.svg", "Fishery.svg",
+            "Flash-flood.svg", "Flood.svg", "Flour.svg", "Folder.svg", "Food-Security.svg",
+            "Food-warehouse.svg", "Food.svg", "Forced-entry.svg", "Forced-recruitment.svg", "Fund.svg",
+            "Gap-analysis.svg", "Gas-station.svg", "Gender-based-violence.svg", "Gender.svg", "Go.svg",
+            "Government-office.svg", "Group.svg", "Handwashing.svg", "Harassment-intimidation.svg",
+            "Health-facility-affected.svg", "Health-facility-destroyed.svg", "Health-facility-not-affected.svg",
+            "Health-facility.svg", "Health-post.svg", "Health-worker.svg", "Health.svg", "Heatwave.svg",
+            "Heavy-rain.svg", "Helicopter.svg", "Helipad.svg", "Help.svg", "Hidden.svg",
+            "Hindu-temple.svg", "Hospital-bed.svg", "Hospital.svg", "Hotel.svg", "House-affected.svg",
+            "House-burned.svg", "House-destroyed.svg", "House-lockdown.svg", "House-not-affected.svg",
+            "House.svg", "Humanitarian-access.svg", "Humanitarian-programme-cycle.svg",
+            "IDP-refugee-camp.svg", "Indigenous people.svg", "Infant.svg", "Infected.svg",
+            "Infection-control.svg", "Information-management.svg", "Information-technology.svg",
+            "Infrastructure.svg", "Injured.svg", "Innovation.svg", "Insect-infestation.svg",
+            "Internally-displaced.svg", "Internet.svg", "Kitchen-set.svg", "Laboratory.svg",
+            "Landslide-mudslide.svg", "Laptop.svg", "Latrine-cabin.svg", "Leadership.svg",
+            "Learning.svg", "Life-saving.svg", "Link.svg", "Live-geoservices.svg", "Livelihood.svg",
+            "Livestock.svg", "Location-lockdown.svg", "Location.svg", "Locust-infestation.svg",
+            "Logistics.svg", "Map.svg", "Market-closed.svg", "Market.svg", "Mask.svg",
+            "Mattress.svg", "Medical-supply.svg", "Medicine.svg", "Meeting.svg", "Menu.svg",
+            "Military-gate.svg", "Mine.svg", "Missing.svg", "Mobile-clinic.svg", "Mobile-phone.svg",
+            "Monitor.svg", "Monitoring.svg", "More-options.svg", "Mosque.svg", "Mosquito-net.svg", "Multi-cluster-sector.svg", "Murder.svg", "National-army.svg", "Needs-assessment.svg",
+            "Next-item.svg", "NGO-office.svg", "Non-food-items-2.svg", "Non-food-items.svg",
+            "Not-affected.svg", "Not-infected.svg", "Not-secured.svg", "Notification.svg",
+            "Nutrition.svg", "Observation-tower.svg", "Oil-facility.svg", "Oil.svg",
+            "Out-of-platform.svg", "P-code.svg", "Partnership.svg", "Password.svg", "Pause.svg",
+            "PDF-file.svg", "Peacekeeping-force.svg", "People-affected.svg", "People-covered.svg",
+            "People-in-need-2.svg", "People-in-need.svg", "People-reached.svg",
+            "People-targeted-2.svg", "People-targeted.svg", "People-with-physical-impairments.svg",
+            "Permanent-camp.svg", "Person-1.svg", "Person-2.svg", "Photo.svg", "Physical-closure.svg",
+            "Physical-distancing.svg", "Plastic-sheeting.svg", "Police-station.svg", "Policy.svg",
+            "Population-growth.svg", "Population-return.svg", "Port-affected.svg", "Port-closed.svg",
+            "Port-destroyed.svg", "Port-not-affected.svg", "Port.svg", "Potable-water-source.svg",
+            "Potable-water.svg", "Poverty.svg", "Power-electricity-affected.svg",
+            "Power-electricity-not-affected.svg", "Power-electricity.svg", "Power-outage.svg",
+            "Pregnant.svg", "Preparedness.svg", "Previous-item.svg", "Print.svg", "Protection.svg",
+            "Public-information.svg", "Radio.svg", "Rebel.svg", "Reconstruction.svg",
+            "Refugee.svg", "Registration.svg", "Relief-goods.svg", "Remote-support.svg",
+            "Remove-document.svg", "Remove.svg", "Report.svg", "Reporting.svg", "Resettlement.svg",
+            "Resilience.svg", "Respiratory.svg", "Response.svg", "Return.svg", "Rice.svg",
+            "Road-affected.svg", "Road-barrier.svg", "Road-closed.svg", "Road-destroyed.svg",
+            "Road-not-affected.svg", "Road.svg", "Roadblock.svg", "Robbery.svg",
+            "Rule-of-law-and-justice.svg", "Rural-exodus.svg", "Rural.svg",
+            "Safety-and-security.svg", "Salt.svg", "Sanitation.svg", "Sanitizer.svg",
+            "Satellite-dish.svg", "Save.svg", "Scale-down-operation.svg", "Scale-up-operation.svg",
+            "School-affected.svg", "School-closed.svg", "School-destroyed.svg",
+            "School-not-affected.svg", "School.svg", "Search-and-rescue.svg", "Search.svg",
+            "Secured.svg", "Security.svg", "See.svg", "Selected.svg", "Services-and-tools.svg",
+            "Settings.svg", "Sex.svg", "Sexual-and-reproductive health.svg", "Sexual-violence.svg",
+            "Share.svg", "Shelter.svg", "Ship.svg", "Shower.svg", "Smartphone.svg",
+            "Snow-avalanche.svg", "Snowfall.svg", "Soap.svg", "Solid-waste.svg",
+            "Spontaneous-site.svg", "Spring-water.svg", "Staff-management.svg", "Stop.svg",
+            "Storm-surge.svg", "Storm.svg", "Stove.svg", "Submersible-pump.svg", "Sugar.svg",
+            "Table.svg", "Tarpaulin.svg", "Technological-disaster.svg", "Temporary-camp.svg",
+            "Tent.svg", "Testing.svg", "Time.svg", "Toilet.svg", "Top-ranking.svg",
+            "Tornado.svg", "Trade-and-market.svg", "Train.svg", "Training.svg",
+            "Transition-site.svg", "Trending.svg", "Truck.svg", "Tsunami.svg", "Tunnel.svg",
+            "UN-compound-office.svg", "UN-vehicle.svg", "University.svg", "Up.svg",
+            "Upload.svg", "Urban-rural.svg", "Urban.svg", "User.svg", "Users.svg",
+            "Vaccine.svg", "Validate-account.svg", "Ventilator.svg", "Video-.svg",
+            "Violent-wind.svg", "Virus.svg", "Volcano.svg", "Walkie-talkie.svg",
+            "Warning-Error.svg", "Water-Sanitation-and-Hygiene.svg", "Water-source.svg",
+            "Water-trucking.svg", "Work-from-home.svg", "Worm-infestation.svg",
+            "XLSX-file.svg", "ZIP-compressed.svg"
+        ];
+
+        const iconGrid = document.getElementById('iconGrid');
+
+        // Render icons
+        icons.forEach(icon => {
+            const iconItem = document.createElement('div');
+            iconItem.classList.add('icon-item');
+
+            iconItem.innerHTML = `
+                <a href="https://raw.githubusercontent.com/UN-OCHA/humanitarian-icons/main/SVG/${icon}" download>
+                    <img src="https://raw.githubusercontent.com/UN-OCHA/humanitarian-icons/main/SVG/${icon}" alt="${icon}">
+                </a>
+                <div class="icon-name">${icon}</div>
+            `;
+
+            iconGrid.appendChild(iconItem);
+        });
+
+        // Filter icons
+        function filterIcons() {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const iconItems = document.querySelectorAll('.icon-item');
+
+            iconItems.forEach(item => {
+                const iconName = item.querySelector('.icon-name').textContent.toLowerCase();
+                item.style.display = iconName.includes(searchInput) ? 'block' : 'none';
+            });
+        }
+
+    </script>
+</body>
+
+</html>
