@@ -43,7 +43,7 @@ OCHA does not intend to establish an official meaning or endorsement for each Hu
 
 ## More Information
 
-For more icons or to request additional formats such as **AI** or **PNG**, visit [brand.unocha.org](https://brand.unocha.org)[ or contact ](https://brand.unocha.org)[ochavisual@un.org](mailto\:ochavisual@un.org).
+For more icons or to request additional formats such as **AI** or **PNG**, visit [brand.unocha.org](https://brand.unocha.org) or contact [ochavisual@un.org](mailto\:ochavisual@un.org).
 
 Thank you for using the OCHA Humanitarian Icons!
 
