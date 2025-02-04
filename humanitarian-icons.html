@@ -5,8 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OCHA Humanitarian Icons Gallery</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --ocha-blue: #009edb;
+            --ocha-dark-blue: #007bb5;
+            --ocha-light-blue: #c7e1f5;
+            --ocha-shadow: #a9d3ef;
+        }
+
         body {
             font-family: 'Roboto', sans-serif;
             background-color: #f9f9f9;
@@ -14,10 +21,17 @@
             padding: 20px;
         }
 
-        h1 {
+        h1,
+        h2 {
             text-align: center;
-            color: #009edb;
-            /* UN Blue */
+            font-size: 3em;
+        }
+
+        p {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 20px;
+            color: #555;
         }
 
         .search-box {
@@ -29,20 +43,20 @@
             padding: 12px 20px;
             width: 320px;
             font-size: 16px;
-            border: 2px solid #009edb;
+            border: 2px solid var(--ocha-blue);
             border-radius: 25px;
             outline: none;
             transition: all 0.3s ease;
         }
 
         .search-box input:focus {
-            border-color: #007bb5;
+            border-color: var(--ocha-dark-blue);
             box-shadow: 0 0 8px rgba(0, 158, 219, 0.6);
         }
 
         .icon-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
             gap: 20px;
             padding: 20px;
         }
@@ -50,24 +64,97 @@
         .icon-item {
             background: white;
             border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 10px;
+            border-radius: 12px;
+            padding: 20px;
             text-align: center;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 190px;
         }
 
         .icon-item img {
             width: 60px;
             height: 60px;
             object-fit: contain;
+            cursor: pointer;
+            align-self: center;
         }
 
         .icon-name {
-            margin-top: 10px;
-            font-size: 14px;
-            color: #333;
+            margin: 10px 0;
+            font-size: 18px;
+            font-weight: 700;
+            color: #222;
             word-break: break-word;
+            text-transform: capitalize;
+            align-self: center;
+        }
+
+        .copy-btn {
+            position: relative;
+            display: inline-block;
+            cursor: pointer;
+            padding: 6px 10px;
+            background: var(--ocha-light-blue);
+            color: black;
+            border: 2px solid var(--ocha-dark-blue);
+            border-radius: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 11px;
+            transform-style: preserve-3d;
+            transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), background 150ms cubic-bezier(0, 0, 0.58, 1);
+            align-self: center;
+            margin-bottom: 10px;
+
+        }
+
+        .copy-btn::before {
+            position: absolute;
+            content: '';
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: var(--ocha-blue);
+            border-radius: inherit;
+            box-shadow: 0 0 0 2px var(--ocha-dark-blue), 0 0.625em 0 0 var(--ocha-shadow);
+            transform: translate3d(0, 0.75em, -1em);
+            transition: transform 150ms cubic-bezier(0, 0, 0.58, 1), box-shadow 150ms cubic-bezier(0, 0, 0.58, 1);
+        }
+
+        .copy-btn:hover {
+            background: var(--ocha-shadow);
+            transform: translate(0, 0.25em);
+        }
+
+        .copy-btn:hover::before {
+            box-shadow: 0 0 0 2px var(--ocha-dark-blue), 0 0.5em 0 0 var(--ocha-shadow);
+            transform: translate3d(0, 0.5em, -1em);
+        }
+
+        .copy-btn:active {
+            background: var(--ocha-shadow);
+            transform: translate(0, 0.75em);
+        }
+
+        .copy-btn:active::before {
+            box-shadow: 0 0 0 2px var(--ocha-dark-blue), 0 0 var(--ocha-shadow);
+            transform: translate3d(0, 0, -1em);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        footer a {
+            color: var(--ocha-blue);
+            text-decoration: none;
         }
 
     </style>
@@ -75,6 +162,7 @@
 
 <body>
     <h1>OCHA Humanitarian Icons Gallery</h1>
+    <p>Browse and download OCHA humanitarian icons in SVG format. Click an icon to download, or copy its URL to embed in dashboards or websites.</p>
 
     <div class="search-box">
         <input type="text" id="searchInput" placeholder="Search icons..." onkeyup="filterIcons()">
@@ -83,6 +171,12 @@
     <div class="icon-grid" id="iconGrid">
         <!-- Icons will be inserted here -->
     </div>
+
+    <footer>
+        <p>OCHA does not intend to establish an official meaning or endorsement for each Humanitarian Icon. Their meaning and representation do not imply acceptance or endorsement by the United Nations. These icons are provided solely as indicative resources, open to interpretation and flexible labeling, to support reporting and advocacy efforts around humanitarian crises.</p>
+        <p>The Humanitarian Icons are Public Domain. You can copy, modify and distribute without asking permission. However, credit to OCHA would be appreciated and a notification to <a href="mailto:ochavisual@un.org">ochavisual@un.org</a> with a link to your webpage or publication for our records.</p>
+        <p>For more information visit <a href="https://brand.unocha.org" target="_blank">brand.unocha.org</a>.</p>
+    </footer>
 
     <script>
         const icons = [
@@ -177,25 +271,32 @@
             "Water-trucking.svg", "Work-from-home.svg", "Worm-infestation.svg",
             "XLSX-file.svg", "ZIP-compressed.svg"
         ];
-
         const iconGrid = document.getElementById('iconGrid');
 
-        // Render icons
         icons.forEach(icon => {
             const iconItem = document.createElement('div');
             iconItem.classList.add('icon-item');
+            const iconUrl = `https://raw.githubusercontent.com/UN-OCHA/humanitarian-icons/main/SVG/${icon}`;
 
             iconItem.innerHTML = `
-                <a href="https://raw.githubusercontent.com/UN-OCHA/humanitarian-icons/main/SVG/${icon}" download>
-                    <img src="https://raw.githubusercontent.com/UN-OCHA/humanitarian-icons/main/SVG/${icon}" alt="${icon}">
+                <a href="${iconUrl}" download>
+                    <img src="${iconUrl}" alt="${icon}">
                 </a>
-                <div class="icon-name">${icon}</div>
+                <div class="icon-name">${icon.replace(/-/g, ' ').replace('.svg', '')}</div>
+                <button class="copy-btn" onclick="copyLink('${iconUrl}')">COPY URL</button>
             `;
 
             iconGrid.appendChild(iconItem);
         });
 
-        // Filter icons
+        function copyLink(url) {
+            navigator.clipboard.writeText(url).then(() => {
+                alert('URL copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy link: ', err);
+            });
+        }
+
         function filterIcons() {
             const searchInput = document.getElementById('searchInput').value.toLowerCase();
             const iconItems = document.querySelectorAll('.icon-item');
