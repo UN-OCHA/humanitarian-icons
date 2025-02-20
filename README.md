@@ -12,19 +12,18 @@ The icons are provided in **SVG format** and are available in three color varian
 
 ## How to Use
 
-- **Embedding in Dashboards and Websites:** You can directly use the icons by copying the URL of each icon. Simply click the **"COPY URL"** button under each icon in the HTML gallery file (`OCHA-Humanitarian-Icons-gallery.html`).
+- **View the Icons Online:** You can explore the full gallery here:  
+  🔗 [OCHA Humanitarian Icons Gallery](https://un-ocha.github.io/humanitarian-icons/)
+- **Embedding in Dashboards and Websites:** Click the **"COPY URL"** button under each icon in the gallery to get the direct link.
 - **Downloading Icons:** Click on any icon in the gallery to download the SVG file.
 - **Downloading from the Repository:** You can also download the icons directly from this repository by navigating to the relevant folders.
-
-- **Embedding in Dashboards and Websites:** You can directly use the icons by copying the URL of each icon. Simply click the **"COPY URL"** button under each icon in the HTML gallery file (`OCHA-Humanitarian-Icons-gallery.html`).
-- **Downloading Icons:** Click on any icon in the gallery to download the SVG file.
 
 ## Facilitating Navigation
 
 To facilitate easy navigation:
 
-- Use the included HTML gallery file (`OCHA-Humanitarian-Icons-gallery.html`) to view all icons with their respective names.
-- Refer to the **CSV file** provided, which maps each icon name to its corresponding URL for all color variants in the CSV file `OCHA_Humanitarian_Icons_URLs.csv`.
+- Use the **[OCHA Humanitarian Icons Gallery](https://un-ocha.github.io/humanitarian-icons/)** to view all icons with their respective names.
+- Refer to the **CSV file** provided (`OCHA_Humanitarian_Icons_URLs.csv`), which maps each icon name to its corresponding URL for all color variants.
 
 ## License
 
@@ -35,7 +34,7 @@ The **Humanitarian Icons** are in the **Public Domain**. You are free to:
 While attribution is not required, we would appreciate:
 
 - Crediting **OCHA** where feasible.
-- Sending a notification to [ochavisual@un.org](mailto\:ochavisual@un.org) with a link to your webpage or publication, for our records.
+- Sending a notification to [ochavisual@un.org](mailto:ochavisual@un.org) with a link to your webpage or publication, for our records.
 
 ## Disclaimer
 
@@ -43,7 +42,6 @@ OCHA does not intend to establish an official meaning or endorsement for each Hu
 
 ## More Information
 
-For additional formats such as **AI** or **PNG**, visit [brand.unocha.org](https://brand.unocha.org) or contact [ochavisual@un.org](mailto\:ochavisual@un.org).
+For additional formats such as **AI** or **PNG**, visit [brand.unocha.org](https://brand.unocha.org) or contact [ochavisual@un.org](mailto:ochavisual@un.org).
 
 Thank you for using the OCHA Humanitarian Icons!
-
